@@ -1,0 +1,34 @@
+
+
+Original mail returned on grounds of incorrect address.
+
+收信人不在， 原件退回。
+
+
+
+
+商保理赔减员
+cb/min
+商保理赔增员
+cb/add
+
+cb/del
+
+cb/update
+
+cb/list
+
+---------------------------------
+商保理赔-新增
+programme/add
+商保理赔-删除
+programme/delete
+商保理赔-更新
+programme/update
+商保理赔-查询
+programme/list
+商保理赔导入
+programme/import
+商保理赔导出
+programme/export
+=================
