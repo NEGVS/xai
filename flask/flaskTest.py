@@ -4,6 +4,7 @@ import json
 
 app = Flask(__name__)
 
+# java 可以调用python程序
 
 @app.route('/add', methods=['POST'])
 def add():
