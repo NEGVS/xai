@@ -1,6 +1,6 @@
 import numpy as np
 import tensorflow as tf
-from torch.backends.mkl import verbose
+# from torch.backends.mkl import verbose
 
 print('tensorflow version:')
 print(tf.__version__)

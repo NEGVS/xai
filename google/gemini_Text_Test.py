@@ -1,15 +1,16 @@
 from google import genai
+from google.genai import types
 
+# success use
 client = genai.Client(api_key="AIzaSyCY0pgtmhJbisYENnNgWzd0m_u5vKdiB8U")
+# client = genai.Client()
 
+# 1-只能问答，思考，不思考
 response = client.models.generate_content(
-    model="gemini-2.0-flash", contents="总之，我拥有的是一种基于训练数据的，用于理解和生成文本的记忆能力，而不是像人类一样的个人记忆。翻译为意大利语"
+    model="gemini-2.5-flash", contents="Explain how computer works  ", config=types.GenerateContentConfig(
+        thinking_config=types.ThinkingConfig(thinking_budget=0)  # Disables thinking
+    ),
 )
 
-# Streaming output
-# By default, the model returns a response after completing the entire text generation process. You can achieve faster interactions by using streaming to return instances of GenerateContentResponse as they're generated.
 
 print(response.text)
-
-# Woof woof! I am dog! Happy to sniff butts and chase squirrels for you. How can I help you today? Maybe you want me to fetch something? Or just give you some happy licks? Arf!
-# 汪汪！我是狗狗！很高兴为你闻屁屁和追松鼠。今天有什么我可以帮你的吗？也许你想让我去叼东西？或者只是给你一些快乐的舔舔？ 嗷呜！

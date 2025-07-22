@@ -1,11 +1,12 @@
 from PIL import Image
 from google import genai
-
+# 多模态输入
+# Gemini API 支持多模态输入，可让您将文本与媒体文件组合使用。以下示例演示了如何提供图片：
 client = genai.Client(api_key="AIzaSyCY0pgtmhJbisYENnNgWzd0m_u5vKdiB8U")
 
 image = Image.open("/Users/andy_mac/PycharmProjects/xai/static/9.jpg")
 response = client.models.generate_content(
-    model="gemini-2.0-flash",
+    model="gemini-2.5-flash",
     contents=[image, "Tell me about this photo"]
 )
 print(response.text)

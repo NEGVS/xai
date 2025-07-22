@@ -1,6 +1,20 @@
+1-网址
+旧版（官方文档）
+https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn
+新版
+https://ai.google.dev/gemini-api/docs/migrate?hl=zh-cn
+
+安装sdk
+pip install -U -q "google-genai"
+
+export GOOGLE_API_KEY="YOUR_API_KEY"
 
 1-get api key
 https://ai.google.dev/gemini-api/docs/libraries
+
+语言	新库（推荐）	旧库
+Python	google-genai	google-generativeai
+
 2- set api key--mac os
 sudo open ~/.zshrc
 
@@ -17,6 +31,11 @@ source ~/.zshrc
         "parts":[{"text": "Write a story about a magic backpack."}]
         }]
        }'
+
+# 将 API 密钥设置为环境变量
+如果您设置了环境变量 GEMINI_API_KEY 或 GOOGLE_API_KEY，
+则客户端在使用某个 Gemini API 库时会自动提取 API 密钥。建议您仅设置其中一个变量，
+但如果同时设置这两个变量，则 GOOGLE_API_KEY 具有优先权。
 
 
 3.1--if reply this success
