@@ -1,0 +1,8 @@
+UPDATE resume SET education = ?,graduate_school = ?,specialty = ?,updated_at = ? WHERE id = ?
+
+10:15:10.586 | http-nio-19201-exec-3 | DEBUG | c.x.j.m.s.R.updateByPrimaryKeySelective | ==>
+Parameters: 1(Integer),
+ (String),
+  (String),
+  2026-01-31 10:15:10.586(Timestamp), 4268826(Integer)
+10:15:10.587 | http-nio-19201-exec-3 | DEBUG | c.x.j.m.s.R.updateByPrimaryKeySelective | <==    Updates: 1
