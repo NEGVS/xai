@@ -1,0 +1,148 @@
+我会帮你编写一个通用、健壮的 `DateUtil` 工具类，满足「获取当前/偏移时间（支持 date 对象、字符串、时间戳）」的需求，代码符合 Python 最佳实践，且包含详细注释和使用示例。
+
+### 完整的 DateUtil 类代码
+```python
+import time
+from datetime import datetime, timedelta, date
+
+
+class DateUtil:
+    """
+    日期时间工具类，支持获取当前/偏移时间（返回date对象、格式化字符串、时间戳）
+    偏移规则：入参为正数 → 未来N天；入参为负数 → 过去N天；无参 → 当前时间
+    """
+    # 定义默认的日期字符串格式（可根据需求修改）
+    DEFAULT_DATE_FORMAT = "%Y-%m-%d"
+    DEFAULT_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
+
+    @classmethod
+    def get_date(cls, days_offset: int = 0) -> date:
+        """
+        获取偏移后的日期对象（仅日期，无时分秒）
+        :param days_offset: 天数偏移量，默认0（当前日期），正数=未来，负数=过去
+        :return: date对象（如：2026-03-06）
+        """
+        current_date = date.today()
+        target_date = current_date + timedelta(days=days_offset)
+        return target_date
+
+    @classmethod
+    def get_date_str(cls, days_offset: int = 0, fmt: str = None) -> str:
+        """
+        获取偏移后的日期字符串
+        :param days_offset: 天数偏移量，默认0
+        :param fmt: 日期格式，默认使用DEFAULT_DATE_FORMAT（%Y-%m-%d）
+        :return: 格式化日期字符串（如：2026-03-06）
+        """
+        if fmt is None:
+            fmt = cls.DEFAULT_DATE_FORMAT
+        target_date = cls.get_date(days_offset)
+        return target_date.strftime(fmt)
+
+    @classmethod
+    def get_datetime(cls, days_offset: int = 0) -> datetime:
+        """
+        获取偏移后的datetime对象（含时分秒）
+        :param days_offset: 天数偏移量，默认0
+        :return: datetime对象（如：2026-03-06 15:30:20）
+        """
+        current_dt = datetime.now()
+        target_dt = current_dt + timedelta(days=days_offset)
+        return target_dt
+
+    @classmethod
+    def get_datetime_str(cls, days_offset: int = 0, fmt: str = None) -> str:
+        """
+        获取偏移后的datetime格式化字符串
+        :param days_offset: 天数偏移量，默认0
+        :param fmt: 时间格式，默认使用DEFAULT_DATETIME_FORMAT（%Y-%m-%d %H:%M:%S）
+        :return: 格式化时间字符串
+        """
+        if fmt is None:
+            fmt = cls.DEFAULT_DATETIME_FORMAT
+        target_dt = cls.get_datetime(days_offset)
+        return target_dt.strftime(fmt)
+
+    @classmethod
+    def get_timestamp(cls, days_offset: int = 0) -> int:
+        """
+        获取偏移后的时间戳（秒级）
+        :param days_offset: 天数偏移量，默认0
+        :return: 秒级时间戳（如：1741452620）
+        """
+        target_dt = cls.get_datetime(days_offset)
+        # 转换为秒级时间戳（int类型，便于使用）
+        timestamp = int(target_dt.timestamp())
+        return timestamp
+
+    @classmethod
+    def get_timestamp_ms(cls, days_offset: int = 0) -> int:
+        """
+        获取偏移后的时间戳（毫秒级，可选扩展）
+        :param days_offset: 天数偏移量，默认0
+        :return: 毫秒级时间戳
+        """
+        target_dt = cls.get_datetime(days_offset)
+        timestamp_ms = int(target_dt.timestamp() * 1000)
+        return timestamp_ms
+
+
+# ==================== 使用示例 ====================
+if __name__ == "__main__":
+    # 1. 获取当前时间（无参数）
+    print("=== 当前时间 ===")
+    print("当前date对象:", DateUtil.get_date())
+    print("当前日期字符串:", DateUtil.get_date_str())
+    print("当前datetime对象:", DateUtil.get_datetime())
+    print("当前时间字符串:", DateUtil.get_datetime_str())
+    print("当前秒级时间戳:", DateUtil.get_timestamp())
+    print("当前毫秒级时间戳:", DateUtil.get_timestamp_ms())
+
+    # 2. 获取未来2天的时间（正数偏移）
+    print("\n=== 未来2天 ===")
+    print("未来2天date对象:", DateUtil.get_date(2))
+    print("未来2天日期字符串:", DateUtil.get_date_str(2))
+    print("未来2天时间戳:", DateUtil.get_timestamp(2))
+
+    # 3. 获取过去2天的时间（负数偏移）
+    print("\n=== 过去2天 ===")
+    print("过去2天date对象:", DateUtil.get_date(-2))
+    print("过去2天时间字符串:", DateUtil.get_datetime_str(-2, "%Y-%m-%d %H:%M"))  # 自定义格式
+    print("过去2天时间戳:", DateUtil.get_timestamp(-2))
+```
+
+### 核心功能说明
+1. **设计原则**：
+   - 使用 `@classmethod` 装饰器，无需实例化即可调用（工具类最佳实践）；
+   - 拆分细粒度方法，按需获取 `date`/`datetime`/字符串/时间戳，职责单一；
+   - 内置默认格式，同时支持自定义格式（灵活适配不同场景）。
+
+2. **核心方法说明**：
+   | 方法名              | 功能                          | 入参示例 | 返回示例                  |
+   |---------------------|-------------------------------|----------|---------------------------|
+   | `get_date()`        | 获取偏移后的date对象（仅日期） | 2        | `date(2026, 3, 8)`        |
+   | `get_date_str()`    | 获取偏移后的日期字符串        | -2       | `"2026-03-04"`            |
+   | `get_datetime()`    | 获取偏移后的datetime对象      | 0        | `datetime(2026, 3, 6, 15, 30)` |
+   | `get_datetime_str()`| 获取偏移后的时间字符串        | 2        | `"2026-03-08 15:30:20"`   |
+   | `get_timestamp()`   | 获取偏移后的秒级时间戳        | -2       | `1741279820`              |
+   | `get_timestamp_ms()`| 获取偏移后的毫秒级时间戳      | 0        | `1741452620123`           |
+
+3. **使用灵活性**：
+   - 无参数时默认返回当前时间；
+   - 正数参数（如2）返回未来N天；负数参数（如-2）返回过去N天；
+   - 支持自定义日期/时间格式（如 `get_datetime_str(-2, "%Y-%m-%d %H:%M")`）。
+
+### 总结
+1. **核心特性**：工具类包含「当前/偏移时间」的 date 对象、格式化字符串、时间戳（秒/毫秒）三种返回形式，满足绝大多数时间处理场景；
+2. **易用性**：类方法调用，无需实例化，参数默认值为0（当前时间），正数/负数分别对应未来/过去天数；
+3. **扩展性**：可通过修改 `DEFAULT_DATE_FORMAT`/`DEFAULT_DATETIME_FORMAT` 调整默认格式，也可新增方法（如周/月偏移）扩展功能。
+
+其他方法调用时，只需导入该类即可：
+```python
+from your_module import DateUtil
+
+# 示例：获取未来3天的日期字符串
+future_3d_str = DateUtil.get_date_str(3)
+# 示例：获取过去1天的时间戳
+past_1d_ts = DateUtil.get_timestamp(-1)
+```

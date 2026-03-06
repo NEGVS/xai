@@ -1,0 +1,133 @@
+我会编写一个**业务示例类**来调用上面的 `DateUtil` 工具类，模拟实际开发中「其他方法/类调用工具类」的场景，包含多个典型使用场景，让你清晰看到如何在业务代码中复用 `DateUtil`。
+
+### 步骤1：先确保 DateUtil 类可被导入
+首先将 `DateUtil` 保存为 `date_util.py`（工具类单独文件，符合模块化规范），代码不变，仅调整文件结构。
+
+### 步骤2：编写调用类（BusinessService）
+新建 `business_service.py`，内容如下：
+```python
+# 导入DateUtil工具类（根据实际路径调整导入语句）
+from date_util import DateUtil
+
+
+class OrderDateService:
+    """
+    订单日期业务服务类（示例：调用DateUtil处理订单相关时间逻辑）
+    """
+
+    def __init__(self):
+        # 初始化时可定义业务专属的时间格式
+        self.order_date_format = "%Y%m%d"  # 订单日期格式：20260306
+        self.order_datetime_format = "%Y-%m-%d %H:%M"  # 订单时间格式：2026-03-06 15:30
+
+    def get_order_expire_date(self, expire_days: int = 7) -> str:
+        """
+        场景1：计算订单过期日期（默认7天后）
+        :param expire_days: 过期天数，默认7天
+        :return: 格式化的过期日期字符串（订单专用格式）
+        """
+        expire_date_str = DateUtil.get_date_str(expire_days, self.order_date_format)
+        print(f"订单过期日期（{expire_days}天后）：{expire_date_str}")
+        return expire_date_str
+
+    def get_refund_deadline_timestamp(self, days: int = -3) -> int:
+        """
+        场景2：计算退款截止时间戳（默认3天前，校验退款是否超时）
+        :param days: 偏移天数，默认-3（3天前）
+        :return: 秒级时间戳
+        """
+        deadline_ts = DateUtil.get_timestamp(days)
+        print(f"退款截止时间戳（{days}天）：{deadline_ts}")
+        return deadline_ts
+
+    def batch_query_order_date(self, day_offsets: list) -> dict:
+        """
+        场景3：批量查询多个偏移天数的时间信息（返回结构化数据）
+        :param day_offsets: 偏移天数列表，如 [0, 2, -5]
+        :return: 键=偏移天数，值=包含多种时间格式的字典
+        """
+        date_result = {}
+        for offset in day_offsets:
+            # 调用DateUtil的多个方法，组合业务数据
+            date_info = {
+                "date_obj": DateUtil.get_date(offset),  # date对象
+                "date_str": DateUtil.get_date_str(offset),  # 默认格式日期
+                "datetime_str": DateUtil.get_datetime_str(offset, self.order_datetime_format),  # 自定义格式时间
+                "timestamp_ms": DateUtil.get_timestamp_ms(offset)  # 毫秒级时间戳
+            }
+            date_result[offset] = date_info
+
+        print(f"批量时间查询结果：{date_result}")
+        return date_result
+
+    def check_order_create_time(self, create_timestamp: int) -> bool:
+        """
+        场景4：校验订单创建时间是否在「昨天至今」的范围内
+        :param create_timestamp: 订单创建时间戳（秒级）
+        :return: 是否在范围内
+        """
+        # 获取昨天的时间戳
+        yesterday_ts = DateUtil.get_timestamp(-1)
+        # 获取当前时间戳
+        current_ts = DateUtil.get_timestamp(0)
+
+        is_valid = yesterday_ts <= create_timestamp <= current_ts
+        print(f"订单创建时间戳 {create_timestamp} 是否有效：{is_valid}")
+        return is_valid
+
+
+# ==================== 测试调用 ====================
+if __name__ == "__main__":
+    # 1. 实例化业务服务类
+    order_service = OrderDateService()
+
+    # 2. 场景1：获取订单过期日期（15天后）
+    order_service.get_order_expire_date(15)
+
+    # 3. 场景2：获取退款截止时间戳（5天前）
+    order_service.get_refund_deadline_timestamp(-5)
+
+    # 4. 场景3：批量查询0天（今天）、3天（未来）、-2天（过去）的时间
+    order_service.batch_query_order_date([0, 3, -2])
+
+    # 5. 场景4：校验订单创建时间戳是否有效（示例：当前时间戳）
+    test_ts = DateUtil.get_timestamp(0)
+    order_service.check_order_create_time(test_ts)
+```
+
+### 核心调用场景说明
+| 调用场景                | 调用的 DateUtil 方法               | 业务意义                     |
+|-------------------------|------------------------------------|------------------------------|
+| 订单过期日期计算        | `get_date_str(expire_days, 自定义格式)` | 生成符合业务格式的过期日期   |
+| 退款截止时间戳          | `get_timestamp(days)`              | 时间戳用于跨系统时间对比     |
+| 批量时间查询            | 组合调用 `get_date`/`get_date_str`/`get_timestamp_ms` | 一次性获取多维度时间数据     |
+| 时间范围校验            | `get_timestamp(-1)`/`get_timestamp(0)` | 校验业务时间是否在有效范围   |
+
+### 运行结果示例
+```
+订单过期日期（15天后）：20260321
+退款截止时间戳（-5天）：1740994800
+批量时间查询结果：{0: {'date_obj': datetime.date(2026, 3, 6), 'date_str': '2026-03-06', 'datetime_str': '2026-03-06 16:05', 'timestamp_ms': 1741454700000}, 3: {'date_obj': datetime.date(2026, 3, 9), 'date_str': '2026-03-09', 'datetime_str': '2026-03-09 16:05', 'timestamp_ms': 1741713900000}, -2: {'date_obj': datetime.date(2026, 3, 4), 'date_str': '2026-03-04', 'datetime_str': '2026-03-04 16:05', 'timestamp_ms': 1741282500000}}
+订单创建时间戳 1741454700 是否有效：True
+```
+
+### 总结
+1. **调用方式**：通过 `from 工具类文件 import 工具类` 导入，类方法直接调用（无需实例化 `DateUtil`）；
+2. **业务适配**：在调用类中可定义专属的时间格式，传递给 `DateUtil` 的方法，满足不同业务的格式需求；
+3. **场景覆盖**：示例包含「单值查询、批量查询、时间校验」三种典型场景，可直接参考扩展到你的实际业务中；
+4. **模块化优势**：工具类与业务类分离，`DateUtil` 专注时间处理，`OrderDateService` 专注业务逻辑，符合「单一职责」设计原则。
+
+### 拓展：极简调用示例（无业务类，直接函数调用）
+如果不需要复杂的业务类，仅需简单调用，可写一个极简的调用脚本（`test_call.py`）：
+```python
+from date_util import DateUtil
+
+# 极简调用示例
+if __name__ == "__main__":
+    # 1. 获取当前日期
+    print("当前日期：", DateUtil.get_date_str())
+    # 2. 获取未来2天的时间戳
+    print("未来2天时间戳：", DateUtil.get_timestamp(2))
+    # 3. 获取过去1天的自定义格式时间
+    print("过去1天时间（自定义格式）：", DateUtil.get_datetime_str(-1, "%Y年%m月%d日"))
+```
