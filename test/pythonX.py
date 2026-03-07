@@ -83,7 +83,7 @@ def ensure_directory(file_path):
 
 def main():
     # 示例文件路径（替换为你的路径）
-    file_path = "/Users/andy_mac/PycharmProjects/xai/google/image/gemini-image_1744789391.png"
+    file_path = "/app/ai/google/image/gemini-image_1744789391.png"
 
     try:
         # 调用函数确保目录存在
