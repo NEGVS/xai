@@ -2,6 +2,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
+from pyStudy.DateUtils import DateUtils
 import hdbscan
 import umap
 import matplotlib.pyplot as plt
@@ -80,6 +81,7 @@ print(cluster_summary)
 
 # 自动兼容保存
 try:
+    str1 = "Hello"
     cluster_summary.to_excel('hdbscan_cluster_summary2.xlsx')
     print("📁 已保存为 Excel：hdbscan_cluster_summary2.xlsx")
 except ImportError:

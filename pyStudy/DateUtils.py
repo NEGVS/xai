@@ -17,8 +17,33 @@ class DateUtils:
         target_date = current_date + timedelta(days=days_offset)
         return target_date
 
+    @classmethod
+    def get_datetime(cls, days_offset: int = 0) -> datetime:
+        """
+        获取偏移后的datetime对象（含时分秒）
+        :param days_offset: 天数偏移量，默认0
+        :return: datetime对象（如：2026-03-06 15:30:20）
+        """
+        current_dt = datetime.now()
+        target_dt = current_dt + timedelta(days=days_offset)
+        return target_dt
+
+    @classmethod
+    def get_timestamp(cls, days_offset: int = 0) -> int:
+        """
+        获取偏移后的时间戳（秒级）
+        :param days_offset: 天数偏移量，默认0
+        :return: 秒级时间戳（如：1741452620）
+        """
+        target_dt = cls.get_datetime(days_offset)
+        # 转换为秒级时间戳（int类型，便于使用）
+        timestamp = int(target_dt.timestamp())
+        return timestamp
+
 
 if __name__ == '__main__':
     print("current date ")
     print("当前date对象:", DateUtils.get_date())
     print(DateUtils.get_date())
+    print(DateUtils.get_datetime())
+    print(DateUtils.get_timestamp())
