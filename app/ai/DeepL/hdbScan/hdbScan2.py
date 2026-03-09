@@ -75,8 +75,9 @@ plt.colorbar(scatter, label='Cluster ID')
 plt.title('HDBSCAN 用户画像分群结果（UMAP 2D 投影）')
 plt.xlabel('UMAP1')
 plt.ylabel('UMAP2')
-plt.grid(True, alpha=0.3)
-
+plt.grid(True, alpha=0.8)
+plt.show()
+# 生成时间戳
 timestamp = DateUtils.get_timestamp()
 FileUtils.create_folder('', 'img')
 plt.savefig('./img/hdbscan_user_clusters' + str(timestamp) + '.png', dpi=300, bbox_inches='tight')
@@ -91,15 +92,14 @@ print(cluster_summary)
 
 # 自动兼容保存
 try:
-    print('================')
-    print(timestamp)
-    print('================')
-
-    excel_path = 'hdbscan_cluster_summary' + str(timestamp) + '.xlsx'
+    FileUtils.create_folder('', 'excel')
+    excel_path = './excel/hdbscan_cluster_summary' + str(timestamp) + '.xlsx'
     cluster_summary.to_excel(excel_path)
-    print("📁 已保存为 Excel：", excel_path)
+    print("已保存为 Excel：", excel_path)
 except ImportError:
-    cluster_summary.to_csv('hdbscan_cluster_summary.csv', encoding='utf-8-sig')
-    print("📁 未安装 openpyxl，已自动保存为 CSV：hdbscan_cluster_summary.csv（推荐装 openpyxl）")
+    FileUtils.create_folder('', 'csv')
+    csv_path = './csv/hdbscan_cluster_summary' + str(timestamp) + '.csv'
+    cluster_summary.to_csv(csv_path, encoding='utf-8-sig')
+    print("未安装 openpyxl，已自动保存为 CSV：", csv_path, "（推荐装 openpyxl）")
 except Exception as e:
     print(f"保存失败：{e}")
