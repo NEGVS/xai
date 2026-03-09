@@ -12,7 +12,8 @@ print(np.__version__)
 # 定义张量
 a = tf.constant([[1, 2], [3, 4]])
 b = tf.constant([[5, 6], [7, 8]])
-
+print(a)
+print(b)
 # matrix add
 c = tf.add(a, b)
 
