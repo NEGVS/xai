@@ -1,7 +1,7 @@
 import numpy as np
-# import matplotlib
+# import matplotlib001
 import matplotlib.pyplot as plt
-# matplotlib.use('Agg')  # 或 'TkAgg'，根据系统支持
+# matplotlib001.use('Agg')  # 或 'TkAgg'，根据系统支持
 # 示例：绘制资金流动图
 months = np.arange(1, 37)  # 3年36个月
 income = np.full(36, 13500)  # 每月收入1.35万

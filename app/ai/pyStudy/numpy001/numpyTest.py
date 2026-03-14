@@ -24,3 +24,6 @@ matrix_B = np.array([[5, 6], [7, 8]])
 # matrix_C = np.matrix_transpose(matrix_A)
 matrix_C = matrix_A @ matrix_B
 print(matrix_C)
+
+x = np.linspace(0,10,100)
+print(x)

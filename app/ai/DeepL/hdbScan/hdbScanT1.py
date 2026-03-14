@@ -1,4 +1,4 @@
-# pip install hdbscan umap-learn scikit-learn pandas matplotlib seaborn plotly -U
+# pip install hdbscan umap-learn scikit-learn pandas matplotlib001 seaborn plotly -U
 
 import pandas as pd
 import numpy as np

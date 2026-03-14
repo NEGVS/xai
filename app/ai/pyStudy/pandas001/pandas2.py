@@ -25,7 +25,7 @@ data = {
 
 df = pd.DataFrame(data)
 
-FileUtils.create_folder('.', 'csv')
+FileUtils.create_folder('', 'csv')
 df.to_csv('./csv/kkk2.csv', index=False, header=False, encoding='utf-8')
 print(df)
 print('====获取其中一列========df["name"]')
