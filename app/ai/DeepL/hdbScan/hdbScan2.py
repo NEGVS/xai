@@ -2,8 +2,8 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-from pyStudy.DateUtils import DateUtils
-from pyStudy.fileUtils import FileUtils
+from app.utils import DateUtils
+from app.ai.pyStudy import FileUtils
 import hdbscan
 import umap
 import matplotlib.pyplot as plt

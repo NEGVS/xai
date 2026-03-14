@@ -95,7 +95,7 @@ class FileUtils:
 # 测试代码（直接运行该文件时执行）
 if __name__ == "__main__":
     # 创建 "test_folder" 文件夹
-    parent_dir = '../app'
+    parent_dir = '../../..'
     child_dir_arr = {'dao', 'model', 'utils', 'config'}
 
     # 创建文件
@@ -112,7 +112,7 @@ if __name__ == "__main__":
         # parent_dir_temp = parent_dir.join('/').join(a)
         parent_dir_temp = parent_dir + '/' + a
         print(parent_dir_temp)
-        FileUtils.create_file(parent_dir_temp, '__init__.py', content=content_str, overwrite=True)
+        FileUtils.create_file(parent_dir_temp, '../__init__.py', content=content_str, overwrite=True)
 
     # 示例3：测试权限问题（比如系统盘根目录，可能无权限）
     # FileUtils.create_folder("C:/", "test_folder")  # Windows示例

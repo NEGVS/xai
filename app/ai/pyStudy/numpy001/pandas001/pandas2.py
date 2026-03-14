@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 
-from pyStudy.fileUtils import FileUtils
+from app.ai.pyStudy.file.fileUtils import FileUtils
 import matplotlib.pyplot as plt
 
 # 关键配置：显示所有列、所有行，取消列宽限制
