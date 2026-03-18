@@ -2,9 +2,14 @@ import os
 from datetime import datetime
 
 # 获取环境变量值
+print(os.environ["DASHSCOPE_API_KEY"])
+print(os.environ["OPENAI_BASE_URL"])
+
 print(os.getenv("DASHSCOPE_API_KEY"))
 # 输出当前时间
-print(os.getenv("DASHSCOPE_API_KEY"))
+print(os.getenv("OPENAI_API_KEY"))
+
+print(os.environ["OPENAI_API_KEY_A"])
 
 current_time = datetime.now()
 # 格式化：年-月-日 时:分:秒
