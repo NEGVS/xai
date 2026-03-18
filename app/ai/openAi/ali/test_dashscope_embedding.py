@@ -18,7 +18,8 @@ class DashScopeEmbeddingTester:
             self,
             api_key: Optional[str] = None,
             base_url: str = "https://dashscope.aliyuncs.com/compatible-mode/v1",
-            default_model: str = "multimodal-embedding-v1",
+            # default_model: str = "multimodal-embedding-v1",
+            default_model: str = "text-embedding-v4",
     ):
         """
         初始化测试类

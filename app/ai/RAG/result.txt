@@ -1,0 +1,78 @@
+/Users/andy_mac/PycharmProjects/xai/venv/bin/python /Users/andy_mac/PycharmProjects/xai/app/ai/RAG/NanoRAG/nano_rag.py
+PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+-----1--初始化 GraphRAG
+INFO:nano-graphrag:Loading tokenizer: type='tiktoken', name='gpt-4o'
+INFO:nano-graphrag:Load KV full_docs with 0 data
+INFO:nano-graphrag:Load KV text_chunks with 0 data
+INFO:nano-graphrag:Load KV llm_response_cache with 0 data
+INFO:nano-graphrag:Load KV community_reports with 0 data
+INFO:nano-graphrag:Loaded graph from my_first_graphrag/graph_chunk_entity_relation.graphml with 15 nodes, 11 edges
+INFO:nano-vectordb:Load (0, 1024) data
+INFO:nano-vectordb:Init {'embedding_dim': 1024, 'metric': 'cosine', 'storage_file': 'my_first_graphrag/vdb_entities.json'} 0 data
+INFO:nano-graphrag:[New Docs] inserting 1 docs
+INFO:nano-graphrag:[New Chunks] inserting 2 chunks
+INFO:nano-graphrag:[Entity Extraction]...
+-----2--初始化完成
+----喂数据---
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+⠹ Processed 2(100%) chunks,  16 entities(duplicated), 4 relations(duplicated)
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+[Embedding 调用] 文本数量: 13 | 第一条预览: "AFROZ HUSSAIN""Afroz Hussain is a data scientist ...
+[Embedding] 批次 1: 10 条
+INFO:nano-graphrag:Inserting 13 vectors to entities
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/embeddings "HTTP/1.1 200 OK"
+[Embedding] 批次 2: 3 条
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/embeddings "HTTP/1.1 200 OK"
+INFO:nano-graphrag:[Community Report]...
+----real_dim---
+1024
+[Embedding完成] 共 13 条
+INFO:nano-graphrag:Each level has communities: {0: 3}
+INFO:nano-graphrag:Generating by levels: [0]
+INFO:openai._base_client:Retrying request to /chat/completions in 0.390554 seconds
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:nano-graphrag:JSON data successfully extracted.
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:nano-graphrag:JSON data successfully extracted.
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:nano-graphrag:JSON data successfully extracted.
+INFO:nano-graphrag:Writing graph with 16 nodes, 12 edges
+INFO:nano-graphrag:Revtrieved 3 communities
+⠸ Processed 3 communities
+知识插入完成！开始构建图谱...
+INFO:nano-graphrag:Grouping to 1 groups for global search
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+WARNING:nano-graphrag:No complete JSON object found in the input string.
+INFO:nano-graphrag:Attempting to extract values from a non-standard JSON string...
+WARNING:nano-graphrag:No values could be extracted from the string.
+ERROR:nano-graphrag:Unable to extract meaningful data from the response.
+【全局查询结果】
+Sorry, I'm not able to provide an answer to that question.
+[Embedding 调用] 文本数量: 1 | 第一条预览: 谁就职在实验室？哪个实验室？...
+[Embedding] 批次 1: 1 条
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/embeddings "HTTP/1.1 200 OK"
+----real_dim---
+1024
+[Embedding完成] 共 1 条
+INFO:nano-graphrag:Using 13 entites, 3 communities, 11 relations, 2 text units
+INFO:httpx:HTTP Request: POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions "HTTP/1.1 200 OK"
+
+【局部查询结果】
+您的问题缺少具体的**背景信息**，因此我无法给出一个确切的答案。世界上有成千上万个实验室，分布在不同的国家、机构和领域。
+
+为了给您准确的回答，**请您补充一下细节**，例如：
+
+1.  **您是指特定的某个人吗？**（例如：某位科学家、企业家、或新闻人物）
+2.  **您是指特定的某个机构吗？**（例如：某所大学、某家科技公司、或国家研究所）
+3.  **这是关于某个作品的情节吗？**（例如：电影、小说、游戏中的实验室）
+4.  **这是关于最近的某个新闻事件吗？**
+
+**如果您是想问一般情况：**
+*   **谁就职在实验室？** 通常是**科研人员、科学家、工程师、实验技术员**以及**研究生/博士生**。
+*   **哪个实验室？** 取决于研究领域，常见的有**国家实验室**（如美国的洛斯阿拉莫斯、中国的合肥国家实验室）、**高校重点实验室**、或**企业研发中心**（如华为实验室、谷歌 X 实验室）。
+
+如果您能提供更多线索，我很乐意为您查询！
+
+Process finished with exit code 0
