@@ -49,9 +49,12 @@ htmlcov/
 .env
 .env.local
 .env.*.local
+!.env.example
 *.env.*
 .env.*
-
+*.key
+*.secret
+app/ai/RAG/result.txt
 # 日志
 *.log
 logs/

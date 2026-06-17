@@ -1,5 +1,20 @@
 # Spring Boot + LangGraph + Multi-Agent 股票分析系统 - 设计文档
 
+# 必须做到：
+.env.example 提交
+.env 永不提交
+secrets 全部 os.getenv
+pre-commit hook
+gitleaks 扫描
+CI check（进阶）
+
+❌ 永远不要做：
+写死 API Key
+提交 .env
+提交 RAG dump（你刚踩的坑）
+commit log 里写 key
+copy production key 到 demo
+
 ## 1. 项目概述
 
 ### 1.1 项目背景
