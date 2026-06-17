@@ -35,8 +35,8 @@ class DashScopeEmbeddingTester:
 
         if not self.api_key:
             raise ValueError(
-                "请设置环境变量 DASHSCOPE_API_KEY，或在初始化时传入 api_key 参数\n"
-                "示例: export DASHSCOPE_API_KEY='sk-xxxx你的key'"
+                "请设置_key 参数\n"
+                "ey'"
             )
 
         print(f"[1 初始化] API Key: {self.api_key[:6]}...{self.api_key[-4:]}")

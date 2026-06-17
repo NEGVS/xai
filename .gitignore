@@ -1,4 +1,24 @@
-# 忽略根目录下的 lib 文件夹及其所有内容（包括子文件/子文件夹）
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 *./lib/
 /pip/
 
@@ -6,14 +26,61 @@
 venv/
 myenv/
 env/
-*.env
+ENV/
+.venv
+.uv/
 
-
-# 日志文件
-*.log
-
-# IDE 配置文件
-.idea/
+# IDE
 .vscode/
+.idea/
 *.swp
 *.swo
+*~
+.DS_Store
+
+# 测试和覆盖率
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+*.env.*
+.env.*
+
+# 日志
+*.log
+logs/
+
+# 数据库
+*.db
+*.sqlite3
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# 向量数据库
+chroma_db/
+milvus_data/
+
+# 模型和数据
+models/
+data/
+*.pkl
+*.h5
+*.pth
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride

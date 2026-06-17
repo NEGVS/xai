@@ -1,0 +1,172 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d7" for="edge" attr.name="order" attr.type="long" />
+  <key id="d6" for="edge" attr.name="source_id" attr.type="string" />
+  <key id="d5" for="edge" attr.name="description" attr.type="string" />
+  <key id="d4" for="edge" attr.name="weight" attr.type="double" />
+  <key id="d3" for="node" attr.name="clusters" attr.type="string" />
+  <key id="d2" for="node" attr.name="source_id" attr.type="string" />
+  <key id="d1" for="node" attr.name="description" attr.type="string" />
+  <key id="d0" for="node" attr.name="entity_type" attr.type="string" />
+  <graph edgedefault="undirected">
+    <node id="&quot;AFROZ HUSSAIN&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Afroz Hussain is a data scientist currently working at PredictifyMe, with extensive experience in Python, scikit-learn, and NLTK."&lt;SEP&gt;"Afroz Hussain is a data scientist with over 10 years of programming experience, currently working on US basic data science and machine learning at PredictifyMe."&lt;SEP&gt;"Afroz Hussain is a data scientist working at PredictifyMe with extensive experience in Python, scikit-learn, and text mining."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+    </node>
+    <node id="&quot;PREDICTIFYME&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"PredictifyMe is a company where Afroz Hussain conducts research related to basic data science and machine learning."&lt;SEP&gt;"PredictifyMe is a company where Afroz Hussain works, involved in data science and machine learning research related to US basic data."&lt;SEP&gt;"PredictifyMe is a company where Afroz Hussain works, focusing on basic data science and machine learning research."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+    </node>
+    <node id="&quot;USA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"USA is mentioned as the region related to the basic data science research conducted by Afroz Hussain."&lt;SEP&gt;"USA is mentioned in the context of Afroz Hussain's research focus on basic data science."&lt;SEP&gt;"USA is the country associated with the basic data science research Afroz Hussain is engaged in."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+    </node>
+    <node id="&quot;KAGGLE COMPETITION&quot;">
+      <data key="d0">"EVENT"</data>
+      <data key="d1">"Kaggle Competition is an event where Afroz Hussain participated to gain new skills in data science."&lt;SEP&gt;"Kaggle Competition is an event where Afroz Hussain participated to gain new skills in data science."&lt;SEP&gt;"Kaggle Competition is an online competition platform Afroz Hussain participated in to acquire new data science skills."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+    </node>
+    <node id="&quot;SUJIT PAL&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Sujit Pal is a data scientist working at Elsevier Labs, specializing in information retrieval, NLP, and machine learning using Python, Scala, and Java."&lt;SEP&gt;"Sujit Pal is inferred from the blog URL, believes in lifelong learning, and shares experiences regarding product improvements and skills."&lt;SEP&gt;"Sujit Pal is a professional working at Elsevier Labs, interested in information retrieval, NLP, and machine learning."&lt;SEP&gt;"Sujit Pal is inferred from the blog URL, believes in lifelong learning, shares experiences on a blog, and helped improve product features for a company."&lt;SEP&gt;"Sujit Pal is a professional working at Elsevier Labs with interests in information retrieval, NLP, and machine learning."&lt;SEP&gt;"Sujit Pal is implied as the owner of the blog sujitpal.blogspot.com, where he shares experiences on lifelong learning and product feature improvement."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+    </node>
+    <node id="&quot;ELSEVIER LABS&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Elsevier Labs is an R&amp;D team including the Reed-Elsevier PLC working group, where Sujit Pal is employed."&lt;SEP&gt;"Elsevier Labs is an R&amp;D team where Sujit Pal is employed, focused on improving product features and building new ones."&lt;SEP&gt;"Elsevier Labs is an R&amp;D team where Sujit Pal works, included in the Reed-Elsevier PLC working group."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+    </node>
+    <node id="&quot;REED-ELSEVIER PLC&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Reed-Elsevier PLC is a working group that includes Elsevier Labs within its structure."&lt;SEP&gt;"Reed-Elsevier PLC is an organization that includes the Elsevier Labs working group."&lt;SEP&gt;"Reed-Elsevier PLC is a working group that includes Elsevier Labs."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+    </node>
+    <node id="&quot;KUMAR RAJ&quot;">
+      <data key="d0">"PERSON"</data>
+      <data key="d1">"Kumar Raj is a second-generation data scientist employed at HP Software, specializing in big data analysis and solutions."&lt;SEP&gt;"Kumar Raj is a second-generation data scientist working at HP Software R&amp;D, specializing in analytics layers and big data analysis."&lt;SEP&gt;"Kumar Raj is a second-generation data scientist working at HP Software, developing analytics layers."&lt;SEP&gt;"Kumar Raj is a second-generation data scientist working in HP Software's R&amp;D department, developing analytics layers for software products."&lt;SEP&gt;"Kumar Raj is a second-generation data scientist working in HP Software's R&amp;D department, focusing on analytics layers and big data."&lt;SEP&gt;"Kumar Raj is a second-generation data scientist working at HP Software developing analytics layers."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d3">[{"level": 0, "cluster": 0}]</data>
+    </node>
+    <node id="&quot;HP SOFTWARE&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"HP Software is a company where Kumar Raj works, providing solutions and developing analytics layers."&lt;SEP&gt;"HP Software is an organization where Kumar Raj works, focusing on software products and providing solutions."&lt;SEP&gt;"HP Software is an organization where Kumar Raj works, providing solutions and developing analytics layers for its software products."&lt;SEP&gt;"HP Software is the company where Kumar Raj works, providing solutions and developing product analytics."&lt;SEP&gt;"HP Software is the company where Kumar Raj works, focusing on software product analytics."&lt;SEP&gt;"HP Software is the organization where Kumar Raj works, focusing on software product development and R&amp;D."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d3">[{"level": 0, "cluster": 0}]</data>
+    </node>
+    <node id="&quot;INDIAN INSTITUTE OF TECHNOLOGY KHARAGPUR&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"An educational institution from which Kumar Raj graduated, specifically the Kharagpur technology branch."&lt;SEP&gt;"Indian Institute of Technology Kharagpur is the educational institution from which Kumar Raj graduated."&lt;SEP&gt;"Indian Institute of Technology Kharagpur is an educational institution where Kumar Raj graduated."&lt;SEP&gt;"Indian Institute of Technology Kharagpur is the educational institution from which Kumar Raj graduated."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;KHARAGPUR&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"Kharagpur is a geographic location associated with the Indian Institute of Technology branch."&lt;SEP&gt;"Kharagpur is the location associated with the Indian Institute of Technology where Kumar Raj studied."&lt;SEP&gt;"Kharagpur is a geographic location where the Indian Institute of Technology branch is situated."&lt;SEP&gt;"Kharagpur is the city where the Indian Institute of Technology branch is located."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d3">[{"level": 0, "cluster": 1}]</data>
+    </node>
+    <node id="&quot;INDIAN INSTITUTE OF TECHNOLOGY&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Indian Institute of Technology is an educational institution where Kumar Raj graduated."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;INDIA&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"India is the country associated with the Indian Institute of Technology."&lt;SEP&gt;"India is the country where the Indian Institute of Technology is located."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;KHARAG&quot;">
+      <data key="d0">"GEO"</data>
+      <data key="d1">"Kharag is a location associated with the Indian Institute of Technology mentioned in Kumar Raj's background."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d3">[{"level": 0, "cluster": 2}]</data>
+    </node>
+    <node id="&quot;UNNAMED COMPANY&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Unnamed Company refers to the organization Sujit Pal helped improve product features for, though not explicitly named in the text."</data>
+      <data key="d2">chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+    </node>
+    <node id="&quot;INDIAN INSTITUTE OF TECHNOLOGY KHARAG&quot;">
+      <data key="d0">"ORGANIZATION"</data>
+      <data key="d1">"Indian Institute of Technology Kharag is the educational institution from which Kumar Raj graduated."</data>
+      <data key="d2">chunk-374b208dcc597a412846595a9ca26c27</data>
+    </node>
+    <edge source="&quot;AFROZ HUSSAIN&quot;" target="&quot;PREDICTIFYME&quot;">
+      <data key="d4">18.0</data>
+      <data key="d5">"Afroz Hussain is currently employed by PredictifyMe to conduct research in data science and machine learning."&lt;SEP&gt;"Afroz Hussain is currently employed by PredictifyMe to conduct research."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;AFROZ HUSSAIN&quot;" target="&quot;USA&quot;">
+      <data key="d4">11.0</data>
+      <data key="d5">"Afroz Hussain's research is related to basic data science in the USA."&lt;SEP&gt;"Afroz Hussain's research work at PredictifyMe is specifically related to basic data science in the USA."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;AFROZ HUSSAIN&quot;" target="&quot;KAGGLE COMPETITION&quot;">
+      <data key="d4">14.0</data>
+      <data key="d5">"Afroz Hussain participated in Kaggle Competition to acquire new skills."&lt;SEP&gt;"Afroz Hussain participated in Kaggle Competitions to gain new skills in data science."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;SUJIT PAL&quot;" target="&quot;ELSEVIER LABS&quot;">
+      <data key="d4">18.0</data>
+      <data key="d5">"Sujit Pal is currently employed by Elsevier Labs where he applies his skills in information retrieval and machine learning."&lt;SEP&gt;"Sujit Pal is currently employed by Elsevier Labs."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;ELSEVIER LABS&quot;" target="&quot;REED-ELSEVIER PLC&quot;">
+      <data key="d4">16.0</data>
+      <data key="d5">"Elsevier Labs is included within the Reed-Elsevier PLC working group."&lt;SEP&gt;"Elsevier Labs is part of the Reed-Elsevier PLC working group."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;KUMAR RAJ&quot;" target="&quot;HP SOFTWARE&quot;">
+      <data key="d4">36.0</data>
+      <data key="d5">"Kumar Raj is currently employed by HP Software in their R&amp;D department, providing solutions.")&lt;SEP&gt;"Kumar Raj works in the R&amp;D department of HP Software developing analytics solutions."&lt;SEP&gt;"Kumar Raj is currently employed by HP Software to provide solutions."&lt;SEP&gt;"Kumar Raj is currently employed by HP Software in their R&amp;D department."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;KUMAR RAJ&quot;" target="&quot;INDIAN INSTITUTE OF TECHNOLOGY KHARAGPUR&quot;">
+      <data key="d4">25.0</data>
+      <data key="d5">"Kumar Raj graduated from the Indian Institute of Technology Kharagpur."&lt;SEP&gt;"Kumar Raj graduated from the Indian Institute of Technology Kharagpur."&lt;SEP&gt;"Kumar Raj graduated from this educational institution, indicating an alumni relationship.")</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;KUMAR RAJ&quot;" target="&quot;INDIAN INSTITUTE OF TECHNOLOGY&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"Kumar Raj graduated from the Indian Institute of Technology."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;INDIAN INSTITUTE OF TECHNOLOGY KHARAGPUR&quot;" target="&quot;KHARAGPUR&quot;">
+      <data key="d4">24.0</data>
+      <data key="d5">"The Indian Institute of Technology Kharagpur is located in Kharagpur."&lt;SEP&gt;"The institute is named after and located in the geographic location Kharagpur.")&lt;SEP&gt;"The Indian Institute of Technology Kharagpur is specifically located in the city of Kharagpur."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27&lt;SEP&gt;chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;INDIAN INSTITUTE OF TECHNOLOGY KHARAGPUR&quot;" target="&quot;INDIA&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The Indian Institute of Technology Kharagpur is located within India."</data>
+      <data key="d6">chunk-47b9d1a3b2005944db1b2c9fed035064</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;INDIAN INSTITUTE OF TECHNOLOGY&quot;" target="&quot;INDIA&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The Indian Institute of Technology is located in India."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d7">1</data>
+    </edge>
+    <edge source="&quot;INDIAN INSTITUTE OF TECHNOLOGY&quot;" target="&quot;KHARAG&quot;">
+      <data key="d4">8.0</data>
+      <data key="d5">"The Indian Institute of Technology has a campus or association with Kharag."</data>
+      <data key="d6">chunk-374b208dcc597a412846595a9ca26c27</data>
+      <data key="d7">1</data>
+    </edge>
+  </graph>
+</graphml>
