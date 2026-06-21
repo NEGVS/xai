@@ -93,8 +93,8 @@ fi
 # 步骤6: 启动 FastAPI 服务
 # ============================================================================
 echo "🌐 启动 FastAPI 服务..."
-echo "📝 API文档: http://localhost:8000/docs"
-echo "🏥 健康检查: http://localhost:8000/api/v1/agents/health"
+echo "📝 API文档: http://127.0.0.1:8000/docs"
+echo "🏥 健康检查: http://127.0.0.1:8000/api/v1/agents/health"
 echo ""
 echo "按 Ctrl+C 停止服务"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
