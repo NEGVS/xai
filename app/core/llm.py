@@ -16,6 +16,7 @@ class LLMService:
         """初始化LLM服务"""
         self.openai_client: Optional[ChatOpenAI] = None
         self.anthropic_client: Optional[ChatAnthropic] = None
+        self.dashscope_client: Optional[ChatOpenAI] = None
 
         # 初始化可用的LLM客户端
         if settings.OPENAI_API_KEY:
@@ -32,11 +33,20 @@ class LLMService:
                 temperature=0.7
             )
 
-        # 默认使用的客户端
-        self.default_client = self.anthropic_client or self.openai_client
+        # 初始化阿里云DashScope客户端（使用OpenAI兼容模式）
+        if settings.DASHSCOPE_API_KEY:
+            self.dashscope_client = ChatOpenAI(
+                model=settings.DASHSCOPE_MODEL,
+                api_key=settings.DASHSCOPE_API_KEY,
+                base_url=settings.DASHSCOPE_BASE_URL,
+                temperature=0.7
+            )
+
+        # 默认使用的客户端（优先级：DashScope > Anthropic > OpenAI）
+        self.default_client = self.dashscope_client or self.anthropic_client or self.openai_client
 
         if not self.default_client:
-            raise ValueError("至少需要配置一个LLM API Key (OPENAI_API_KEY 或 ANTHROPIC_API_KEY)")
+            raise ValueError("至少需要配置一个LLM API Key (DASHSCOPE_API_KEY, ANTHROPIC_API_KEY 或 OPENAI_API_KEY)")
 
     def get_client(self, provider: str = "default"):
         """获取指定的LLM客户端"""
@@ -44,6 +54,8 @@ class LLMService:
             return self.openai_client
         elif provider == "anthropic" and self.anthropic_client:
             return self.anthropic_client
+        elif provider == "dashscope" and self.dashscope_client:
+            return self.dashscope_client
         elif provider == "default":
             return self.default_client
         else:

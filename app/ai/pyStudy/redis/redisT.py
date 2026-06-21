@@ -1,10 +1,14 @@
 import redis
+import os
 
-# 阿里云Redis配置（替换为你的实际信息）
-REDIS_HOST = "r-uf63qqg3rwom4cz59u.redis.rds.aliyuncs.com"
-REDIS_PORT = 6379
-REDIS_PASSWORD = "dehB5GWF6j7jrMDa"  # 必须填，阿里云Redis默认有密码
-REDIS_DB = 8  # 你的库是8，不用改
+# 阿里云Redis配置（从环境变量获取）
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_PORT = int(os.getenv("REDIS_PORT", "6379"))
+REDIS_PASSWORD = os.getenv("REDIS_PASSWORD")  # 从环境变量获取密码
+REDIS_DB = int(os.getenv("REDIS_DB", "0"))
+
+if not REDIS_PASSWORD:
+    raise ValueError("请设置 REDIS_PASSWORD 环境变量")
 
 # 连接Redis
 r = redis.Redis(

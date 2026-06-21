@@ -2,7 +2,7 @@
 核心配置文件
 """
 import os
-from typing import Optional
+from typing import Optional, List
 from pydantic_settings import BaseSettings
 from pydantic import Field
 
@@ -26,6 +26,25 @@ class Settings(BaseSettings):
     OPENAI_MODEL: str = Field(default="gpt-4", validation_alias="OPENAI_MODEL")
     ANTHROPIC_API_KEY: Optional[str] = Field(default=None, validation_alias="ANTHROPIC_API_KEY")
     ANTHROPIC_MODEL: str = Field(default="claude-3-sonnet-20240229", validation_alias="ANTHROPIC_MODEL")
+
+    # 阿里云DashScope配置
+    DASHSCOPE_API_KEY: Optional[str] = Field(default=None, validation_alias="DASHSCOPE_API_KEY")
+    DASHSCOPE_BASE_URL: str = Field(
+        default="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        validation_alias="DASHSCOPE_BASE_URL"
+    )
+    DASHSCOPE_MODEL: str = Field(default="qwen-plus", validation_alias="DASHSCOPE_MODEL")
+    DASHSCOPE_FALLBACK_MODELS: List[str] = Field(
+        default=["qwen-plus", "qwen-turbo"],
+        validation_alias="DASHSCOPE_FALLBACK_MODELS"
+    )
+
+    # Google AI配置
+    GOOGLE_API_KEY: Optional[str] = Field(default=None, validation_alias="GOOGLE_API_KEY")
+    GEMINI_API_KEY: Optional[str] = Field(default=None, validation_alias="GEMINI_API_KEY")
+
+    # DeepSeek配置
+    DEEPSEEK_API_KEY: Optional[str] = Field(default=None, validation_alias="DEEPSEEK_API_KEY")
 
     # 数据库配置
     DATABASE_URL: str = Field(

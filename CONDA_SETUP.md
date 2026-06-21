@@ -4,7 +4,102 @@
 - **环境名称**: xai
 - **Python 版本**: 3.11.15
 - **位置**: `/opt/anaconda3/envs/xai`
+# 我的使用
+1-逻辑：Conda 管 Python 版本 + 全局环境隔离，UV 管项目依赖、极速安装
 
+2- UV 使用方法
+   1- 使用 Conda 切换到对应的环境。
+   2- uv init，初始化。 
+   3- 新增导入时，使用 uv add openai
+   4- 终端设置好后，pycharm中要重新选择一下编译器。
+
+你把.venv删掉了，所以找不到激活文件，现在重新用 uv 生成就行
+
+## 已经在 conda xai 环境里，直接执行
+uv venv
+生成后激活
+
+source .venv/bin/activate
+安装依赖
+uv add openai
+## 完整正确流程（conda+uv 固定用法）
+进入 conda 环境
+conda activate xai
+项目内创建 uv 虚拟环境（只建一次）
+uv venv
+激活 uv 环境
+source .venv/bin/activate
+装包用 uv add，运行用 uv run
+
+
+# 异常 1
+---
+(venv) (base) andy_mac@Andy-FandeMacBook-Pro-547 xai % conda env list
+# conda environments:
+#
+base                  *  /opt/anaconda3
+aiAgent                  /opt/anaconda3/envs/aiAgent
+xai                      /opt/anaconda3/envs/xai
+
+(venv) (base) andy_mac@Andy-FandeMacBook-Pro-547 xai % python --version
+Python 3.11.12
+(venv) (base) andy_mac@Andy-FandeMacBook-Pro-547 xai %
+
+### 问题说明
+你现在**同时嵌套了 conda(base) + 原生venv虚拟环境**，环境乱套了，提示符 `(venv) (base)` 就是典型冲突。
+
+### 现状
+1. `conda env list` 有3个环境：
+   - base（当前conda默认）
+   - aiAgent
+   - xai
+2. 你现在在`xai`目录，**既进了conda base，又手动开了venv**
+3. `python --version` 3.11.1 是外层版本，不是目标虚拟环境版本
+
+---
+
+## 1. 退出双层环境
+```bash
+# 先退出原生venv
+deactivate
+# 再退出conda base
+conda deactivate
+```
+提示符变回 `andy_mac@xxx` 干净状态
+
+## 2. 只用Conda管理环境（推荐，抛弃venv）
+```bash
+# 进入 xai 这个conda环境
+conda activate xai
+
+# 查看当前python版本
+python --version
+
+# 查看当前所在环境
+conda info --envs
+```
+
+## 3. 彻底清理多余venv（可选）
+```bash
+# 删除项目里自建的venv文件夹
+rm -rf venv
+```
+
+## 4. 日常正确使用流程
+```bash
+# 打开终端直接进目标环境
+conda activate xai
+
+# 退出
+conda deactivate
+```
+
+## 5. 取消conda默认自动激活base（根治总带base）
+```bash
+conda config --set auto_activate_base false
+```
+重启终端就不会一打开就带 `(base)`
+------------
 ## 如何使用
 
 ### 1. 激活环境

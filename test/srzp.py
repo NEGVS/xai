@@ -1,6 +1,7 @@
 import json
 import time
 import requests
+import os
 
 import pandas as pd
 import pymysql
@@ -73,9 +74,16 @@ ORDER BY orv.employed_time
     """, "每周六回访数据明细%s.xls" % date_str),
 ]
 
-# 1. 连接MySQL数据库
-db = pymysql.connect(host="polar-syh-prod-lan.rwlb.rds.aliyuncs.com", user="readonly", password="Us7da88eGYtdQBW3",
-                     database="supply_db")
+# 1. 连接MySQL数据库（从环境变量获取配置）
+DB_HOST = os.getenv("MYSQL_HOST", "localhost")
+DB_USER = os.getenv("MYSQL_USER", "root")
+DB_PASSWORD = os.getenv("MYSQL_PASSWORD")
+DB_NAME = os.getenv("MYSQL_DATABASE", "supply_db")
+
+if not DB_PASSWORD:
+    raise ValueError("请设置 MYSQL_PASSWORD 环境变量")
+
+db = pymysql.connect(host=DB_HOST, user=DB_USER, password=DB_PASSWORD, database=DB_NAME)
 cursor = db.cursor()
 
 # 2. 对于每个模型，执行查询并保存为CSV

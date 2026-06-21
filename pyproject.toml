@@ -8,21 +8,17 @@ dependencies = [
     "fastapi>=0.100.0",
     "flask>=3.0.0",
     "uvicorn[standard]>=0.20.0",
-
     # AI/LLM 核心
     "openai>=1.0.0",
     "langchain>=0.1.0",
     "langchain-openai>=0.0.5",
     "langchain-community>=0.0.20",
-
     # 向量存储和检索
     "chromadb>=0.4.0",
-
     # 机器学习
     "scikit-learn>=1.3.0",
     "numpy>=1.24.0",
     "pandas>=2.0.0",
-
     # 工具
     "python-dotenv>=1.0.0",
     "httpx>=0.24.0",

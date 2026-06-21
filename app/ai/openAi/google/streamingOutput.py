@@ -1,8 +1,16 @@
 from google import genai
+import os
+
 # 流式响应
 # 默认情况下，模型仅在整个生成过程完成后才会返回回答。
 # 为了实现更流畅的互动，请使用流式传输在 GenerateContentResponse 实例生成时逐步接收这些实例。
-client = genai.Client(api_key="AIzaSyCY0pgtmhJbisYENnNgWzd0m_u5vKdiB8U")
+
+# 从环境变量获取API key
+api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("请设置 GOOGLE_API_KEY 或 GEMINI_API_KEY 环境变量")
+
+client = genai.Client(api_key=api_key)
 
 response = client.models.generate_content_stream(
     model="gemini-2.5-flash", contents="总之，我拥有的是一种基于训练数据的，用于理解和生成文本的记忆能力，而不是像人类一样的个人记忆。翻译为意大利语"

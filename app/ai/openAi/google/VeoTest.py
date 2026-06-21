@@ -1,9 +1,17 @@
 import time
+import os
 from google import genai
 from google.genai import types
+
 # https://ai.google.dev/gemini-api/docs/video#python
 # 付费
-client = genai.Client(api_key="AIzaSyCY0pgtmhJbisYENnNgWzd0m_u5vKdiB8U")  # read API key from GOOGLE_API_KEY
+
+# 从环境变量获取API key
+api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("请设置 GOOGLE_API_KEY 或 GEMINI_API_KEY 环境变量")
+
+client = genai.Client(api_key=api_key)
 
 operation = client.models.generate_videos(
     model="veo-2.0-generate-001",

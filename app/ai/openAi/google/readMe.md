@@ -18,7 +18,7 @@ Python	google-genai	google-generativeai
 2- set api key--mac os
 sudo open ~/.zshrc
 
-export GEMINI_API_KEY=AIzaSyCY0pgtmhJbisYENnNgWzd0m_u5vKdiB8U
+export GEMINI_API_KEY=YOUR_ACTUAL_API_KEY_HERE
 
 source ~/.zshrc
 3-test the api key

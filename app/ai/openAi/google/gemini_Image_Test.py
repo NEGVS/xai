@@ -1,8 +1,16 @@
 from PIL import Image
 from google import genai
+import os
+
 # 多模态输入
 # Gemini API 支持多模态输入，可让您将文本与媒体文件组合使用。以下示例演示了如何提供图片：
-client = genai.Client(api_key="AIzaSyCY0pgtmhJbisYENnNgWzd0m_u5vKdiB8U")
+
+# 从环境变量获取API key
+api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("请设置 GOOGLE_API_KEY 或 GEMINI_API_KEY 环境变量")
+
+client = genai.Client(api_key=api_key)
 
 image = Image.open("/static/9.jpg")
 response = client.models.generate_content(

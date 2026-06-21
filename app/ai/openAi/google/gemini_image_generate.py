@@ -20,8 +20,12 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 # Gemini 2.0 Flash Experimental支持输出文本和内联图像。这使您可以使用Gemini进行对话式编辑图像或生成交织文本的输出（例如，
 # 在一个回合中生成包含文本和图像的博客文章）。所有生成的图像都包含SynthID水印，Google AI Studio中的图像也包含可见水印。
 
+# 从环境变量获取API key
+api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("请设置 GOOGLE_API_KEY 或 GEMINI_API_KEY 环境变量")
 
-client = genai.Client(api_key="AIzaSyCY0pgtmhJbisYENnNgWzd0m_u5vKdiB8U")
+client = genai.Client(api_key=api_key)
 
 contents = ('Generate a giant iPhone')
 

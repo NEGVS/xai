@@ -1,11 +1,16 @@
 from flask import Flask, request, jsonify
 from google import genai
 from google.genai import types
+import os
 
 app = Flask(__name__)
 
-# Initialize the Google GenAI client with the API key
-client = genai.Client(api_key="AIzaSyCY0pgtmhJbisYENnNgWzd0m_u5vKdiB8U")
+# Initialize the Google GenAI client with the API key from environment variable
+api_key = os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("请设置 GOOGLE_API_KEY 或 GEMINI_API_KEY 环境变量")
+
+client = genai.Client(api_key=api_key)
 
 @app.route('/generate-content', methods=['POST'])
 def generate_content():
