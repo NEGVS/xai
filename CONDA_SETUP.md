@@ -5,7 +5,7 @@
 - **Python 版本**: 3.11.15
 - **位置**: `/opt/anaconda3/envs/xai`
 # 我的使用
-1-逻辑：Conda 管 Python 版本 + 全局环境隔离，UV 管项目依赖、极速安装
+1- 环境管理：Conda 管 Python 版本 + 全局环境隔离，UV 管项目依赖、极速安装
 
 2- UV 使用方法
    1- 使用 Conda 切换到对应的环境。

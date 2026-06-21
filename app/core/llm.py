@@ -4,8 +4,7 @@ LLM服务封装
 from typing import Optional, Dict, Any, List
 import os
 from langchain_openai import ChatOpenAI
-from langchain_anthropic import ChatAnthropic
-from langchain.schema import HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 from app.core.config import settings
 
 
@@ -14,24 +13,7 @@ class LLMService:
 
     def __init__(self):
         """初始化LLM服务"""
-        self.openai_client: Optional[ChatOpenAI] = None
-        self.anthropic_client: Optional[ChatAnthropic] = None
         self.dashscope_client: Optional[ChatOpenAI] = None
-
-        # 初始化可用的LLM客户端
-        if settings.OPENAI_API_KEY:
-            self.openai_client = ChatOpenAI(
-                model=settings.OPENAI_MODEL,
-                api_key=settings.OPENAI_API_KEY,
-                temperature=0.7
-            )
-
-        if settings.ANTHROPIC_API_KEY:
-            self.anthropic_client = ChatAnthropic(
-                model=settings.ANTHROPIC_MODEL,
-                api_key=settings.ANTHROPIC_API_KEY,
-                temperature=0.7
-            )
 
         # 初始化阿里云DashScope客户端（使用OpenAI兼容模式）
         if settings.DASHSCOPE_API_KEY:
@@ -42,24 +24,20 @@ class LLMService:
                 temperature=0.7
             )
 
-        # 默认使用的客户端（优先级：DashScope > Anthropic > OpenAI）
-        self.default_client = self.dashscope_client or self.anthropic_client or self.openai_client
+        # 默认使用DashScope客户端
+        self.default_client = self.dashscope_client
 
         if not self.default_client:
-            raise ValueError("至少需要配置一个LLM API Key (DASHSCOPE_API_KEY, ANTHROPIC_API_KEY 或 OPENAI_API_KEY)")
+            raise ValueError("需要配置 DASHSCOPE_API_KEY 环境变量")
 
     def get_client(self, provider: str = "default"):
         """获取指定的LLM客户端"""
-        if provider == "openai" and self.openai_client:
-            return self.openai_client
-        elif provider == "anthropic" and self.anthropic_client:
-            return self.anthropic_client
-        elif provider == "dashscope" and self.dashscope_client:
+        if provider == "dashscope" and self.dashscope_client:
             return self.dashscope_client
         elif provider == "default":
             return self.default_client
         else:
-            raise ValueError(f"LLM provider '{provider}' 不可用")
+            raise ValueError(f"LLM provider '{provider}' 不可用，当前仅支持 dashscope")
 
     async def analyze_sentiment(self, text: str) -> Dict[str, Any]:
         """

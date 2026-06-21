@@ -19,7 +19,7 @@
         if not self.api_key:
             raise ValueError("请设置 DASHSCOPE_API_KEY 环境变量，或在初始化时传入 api_key 参数")
 
-后面的项目只是使用 DASHSCOPE_API_KEY 的模型，之前使用其他的是 临时、测试使用。
+后面的项目只是使用 DASHSCOPE_API_KEY 的模型（已经配置到设备的环境变量了），之前使用其他的是 临时、测试使用。
 
 # 必须做到：
 你是顶尖软件工程师，你只需要写好代码即可，没有让你测试、总结时请不要测试、总结 这个过程太浪费时间了。你只需正确无误的写好代码，需要测试、总结时我会告诉你。
@@ -129,6 +129,8 @@ copy production key 到 demo
 ```
 
 ### 2.2 技术栈
+## 环境管理
+Conda 管 Python 版本 + 全局环境隔离，UV 管项目依赖、极速安装
 
 #### 后端
 - **框架**: Spring Boot 3.x
