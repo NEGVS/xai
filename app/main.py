@@ -1,9 +1,10 @@
 """
 FastAPI主应用
 """
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.v1 import stock, agents
+from app.api.v1 import stock, agents, chat
 from app.core.config import settings
 import logging
 
@@ -15,13 +16,38 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """应用生命周期管理"""
+    # 启动事件
+    logger.info(f"🚀 {settings.APP_NAME} v{settings.APP_VERSION} 启动中...")
+    logger.info(f"📝 环境: {settings.ENVIRONMENT}")
+
+    # 显示可访问的URL（0.0.0.0不能直接在浏览器访问）
+    host_display = "127.0.0.1" if settings.API_HOST == "0.0.0.0" else settings.API_HOST
+    logger.info(f"🔗 API文档: http://{host_display}:{settings.API_PORT}/docs")
+    logger.info(f"🤖 LLM: {settings.DASHSCOPE_MODEL} (DashScope)")
+    logger.info(f""" ⏺ 0.0.0.0 是服务器监听地址，浏览器无法直接访问。请使用以下地址：
+     
+    http://127.0.0.1:8000/docs 或 http://localhost:8000/docs
+  
+    启动成功 """)
+
+    yield
+
+    # 关闭事件
+    logger.info(f"👋 {settings.APP_NAME} 关闭中...")
+
+
 # 创建FastAPI应用
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     description="基于LangGraph的Multi-Agent股票分析系统",
     docs_url="/docs",
-    redoc_url="/redoc"
+    redoc_url="/redoc",
+    lifespan=lifespan
 )
 
 # CORS配置
@@ -36,6 +62,7 @@ app.add_middleware(
 # 注册路由
 app.include_router(stock.router, prefix=settings.API_PREFIX)
 app.include_router(agents.router, prefix=settings.API_PREFIX)
+app.include_router(chat.router, prefix=settings.API_PREFIX)
 
 
 @app.get("/")
@@ -56,21 +83,6 @@ async def health_check():
         "status": "ok",
         "environment": settings.ENVIRONMENT
     }
-
-
-@app.on_event("startup")
-async def startup_event():
-    """应用启动事件"""
-    logger.info(f"🚀 {settings.APP_NAME} v{settings.APP_VERSION} 启动中...")
-    logger.info(f"📝 环境: {settings.ENVIRONMENT}")
-    logger.info(f"🔗 API文档: http://{settings.API_HOST}:{settings.API_PORT}/docs")
-    logger.info(f"🤖 LLM: {settings.ANTHROPIC_MODEL if settings.ANTHROPIC_API_KEY else settings.OPENAI_MODEL}")
-
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """应用关闭事件"""
-    logger.info(f"👋 {settings.APP_NAME} 关闭中...")
 
 
 if __name__ == "__main__":
