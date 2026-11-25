@@ -32,11 +32,11 @@ def generate_sql():
         reader = csv.reader(f, delimiter=',')
 
         # 跳过标题行
-        # next(reader)
+        next(reader)
 
         for row in reader:
 
-            print(len(row))
+            # print(len(row))
             if len(row) < 6:
                 print(f"跳过行（字段不足）: {row}")
                 continue
@@ -63,7 +63,8 @@ def generate_sql():
 
             # 生成 SQL
             sql = f"""INSERT INTO srzp_service.virtual_job_category_pro (group_code, name, category_id, a2_match, a3_match, b_match, c_match, created_at, updated_at, deleted_at)
-VALUES ({group_code_sql}, {name_sql}, 1, {a2_match_sql}, {a3_match_sql}, {b_match_sql}, {c_match_sql}, NOW(), NOW(), NULL);"""
+                      VALUES ({group_code_sql}, {name_sql}, 1, {a2_match_sql}, {a3_match_sql}, {b_match_sql}, {c_match_sql}, NOW(), NOW(), NULL);
+                    """
 
             sql_statements.append(sql)
 
@@ -77,8 +78,11 @@ VALUES ({group_code_sql}, {name_sql}, 1, {a2_match_sql}, {a3_match_sql}, {b_matc
     print(f"📄 输出文件: {output_file}")
 
     # 打印前3条预览
-    print("\n--- 前3条SQL预览 ---")
-    for sql in sql_statements[:3]:
+    print("\n--- 前3000条SQL预览 ---")
+    count=0
+    for sql in sql_statements[:3000]:
+        count += 1
+        # print(count)
         print(sql)
         print()
 
