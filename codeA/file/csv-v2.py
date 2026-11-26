@@ -10,7 +10,7 @@ import csv
 #
 csv_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/岗位关联表_-_关联关系表V2.0.csv'
 # 输出文件路径
-output_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/generated_sql-2.sql'
+output_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/generated_sql-2----2.sql'
 import re
 
 
@@ -31,6 +31,26 @@ def extract_nums(text: str) -> list[int]:
 
 def clean_value(value):
     """清理字段值，去除多余空格和引号"""
+    # print('clean_value:', value)
+    """
+        统一清理字段：
+        - list：拼接成逗号分隔字符串 "1,2,3"
+        - str：去空格、引号、转义单引号
+        - 空/None：返回 ''
+        """
+    # print('clean_value:', value)
+
+    # 列表转为逗号分隔字符串
+    if isinstance(value, list):
+        value = ",".join(str(x) for x in value)
+
+    # 空值处理
+    if not value:
+        return "''"
+
+    if not isinstance(value, str):
+        value = str(value)
+
     if not value:
         return "''"
     value = value.strip().strip('"').strip()
@@ -100,8 +120,7 @@ def generate_sql():
             c_match_sql = clean_value(c_match)
 
             # 生成 SQL
-            sql = f"""INSERT INTO srzp_service.virtual_job_category_pro (group_code, name, category_id, a2_match, a3_match, b_match, c_match, created_at, updated_at, deleted_at)
-                      VALUES ({group_code_sql}, {name_sql}, 1, {a2_match_sql}, {a3_match_sql}, {b_match_sql}, {c_match_sql}, NOW(), NOW(), NULL);
+            sql = f"""INSERT INTO srzp_service.virtual_job_category_pro (group_code, name, a2_match, a3_match, b_match, c_match, created_at, updated_at, deleted_at) VALUES ({group_code_sql}, {name_sql}, {a2_match_sql}, {a3_match_sql}, {b_match_sql}, {c_match_sql}, NOW(), NOW(), NULL);
                     """
 
             sql_statements.append(sql)
@@ -109,20 +128,20 @@ def generate_sql():
     # 写入输出文件
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write('-- 自动生成的SQL语句\n')
-        f.write('-- 生成时间: ' + str(__import__('datetime').datetime.now()) + '\n\n')
-        f.write('\n\n'.join(sql_statements))
+        f.write('-- 生成时间: ' + str(__import__('datetime').datetime.now()) + '\n')
+        f.write('\n'.join(sql_statements))
 
     print(f"✅ 成功生成 {len(sql_statements)} 条SQL语句")
     print(f"📄 输出文件: {output_file}")
 
     # 打印前3条预览
-    print("\n--- 前3000条SQL预览 ---")
+    print("--- 前3000条SQL预览 ---")
     count = 0
-    for sql in sql_statements[:3]:
+    for sql in sql_statements[:300]:
         count += 1
         # print(count)
         print(sql)
-        print()
+        # print()
 
 
 if __name__ == '__main__':

@@ -4,6 +4,12 @@ from collections import Counter, defaultdict, deque
 from itertools import chain, groupby
 from functools import reduce
 import json
+import re
+import tempfile
+from dataclasses import dataclass
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Dict, Iterable, Iterator, List, Optional, Sequence, Tuple
 
 # ============ 配置日志 ============
 logging.basicConfig(
@@ -174,9 +180,9 @@ def demo_set_operations():
         logger.info(f"5-2 对称差集: {set_a ^ set_b}")
 
         # 5-3 集合成员检查（O(1)性能）
-        large_set = set(range(1000000))
-        logger.info(f"5-3 999999 在集合中: {999999 in large_set}")
-        logger.info(f"5-3 1000001 在集合中: {1000001 in large_set}")
+        large_set = set(range(10000))
+        logger.info(f"5-3 9999 在集合中: {9999 in large_set}")
+        logger.info(f"5-3 10001 在集合中: {10001 in large_set}")
     except Exception as e:
         logger.error(f"集合操作失败: {e}", exc_info=True)
 
@@ -334,29 +340,18 @@ def demo_file_operations():
     try:
         logger.info("\n========== 10. 文件操作 ==========")
 
-        # 10-1 文件写入
-        file_path = "/tmp/test_python.txt"
-        with open(file_path, "w", encoding="utf-8") as f:
-            f.write("Hello Python\n")
-            f.write("第二行\n")
-        logger.info(f"10-1 文件写入成功: {file_path}")
+        # 使用临时目录，with 退出后自动清理，不覆盖用户文件
+        with tempfile.TemporaryDirectory(prefix="python-study-") as temp_dir:
+            file_path = Path(temp_dir) / "example.txt"
+            file_path.write_text("Hello Python\n第二行\n", encoding="utf-8")
+            content = file_path.read_text(encoding="utf-8")
+            logger.info(f"10-1 Path读写文件：{file_path.name}，内容行数={len(content.splitlines())}")
 
-        # 10-2 文件读取
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        logger.info(f"10-2 文件内容:\n{content}")
-
-        # 10-3 JSON 操作
+        # 10-2 JSON 序列化与反序列化
         data = {"name": "张三", "age": 25, "skills": ["Python", "Java"]}
         json_str = json.dumps(data, ensure_ascii=False)
-        logger.info(f"10-3 对象转JSON: {json_str}")
-        parsed = json.loads(json_str)
-        logger.info(f"10-3 JSON转对象: {parsed}")
-
-        # 10-4 清理测试文件
-        if os.path.exists(file_path):
-            os.remove(file_path)
-            logger.info(f"10-4 清理测试文件: {file_path}")
+        logger.info(f"10-2 对象转JSON: {json_str}")
+        logger.info(f"10-2 JSON转对象: {json.loads(json_str)}")
     except Exception as e:
         logger.error(f"文件操作失败: {e}", exc_info=True)
 
@@ -396,6 +391,112 @@ def demo_advanced_data_structures():
         logger.error(f"高级数据结构失败: {e}", exc_info=True)
 
 
+# ============ 12. 迭代器与生成器 ============
+def fibonacci(limit: int) -> Iterator[int]:
+    """生成前 limit 个斐波那契数；生成器按需产出，避免一次性创建大列表。"""
+    left, right = 0, 1
+    for _ in range(max(0, limit)):
+        yield left
+        left, right = right, left + right
+
+
+def demo_iterators_and_generators() -> None:
+    logger.info("\n========== 12. 迭代器与生成器 ==========")
+    values = fibonacci(8)
+    logger.info(f"12-1 生成器对象类型: {type(values).__name__}")
+    logger.info(f"12-2 惰性取值: {list(values)}")
+    logger.info(f"12-3 any/all: any([0, 2])={any([0, 2])}, all([1, 2])={all([1, 2])}")
+
+
+# ============ 13. 装饰器与闭包 ============
+def log_call(func):
+    """演示装饰器并保留原函数元信息。"""
+    from functools import wraps
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        logger.info(f"调用函数: {func.__name__}")
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+@log_call
+def add_numbers(left: int, right: int) -> int:
+    return left + right
+
+
+def make_multiplier(factor: int):
+    """闭包捕获外层变量；返回一个可复用的函数。"""
+    return lambda value: value * factor
+
+
+def demo_decorators_and_closures() -> None:
+    logger.info("\n========== 13. 装饰器与闭包 ==========")
+    logger.info(f"13-1 装饰器调用结果: {add_numbers(2, 3)}")
+    triple = make_multiplier(3)
+    logger.info(f"13-2 闭包调用结果: {triple(4)}")
+
+
+# ============ 14. 类型提示与数据类 ============
+@dataclass(frozen=True)
+class Student:
+    name: str
+    score: float
+
+
+def average_score(scores: Sequence[float]) -> Optional[float]:
+    """空输入明确返回 None，避免除零异常。"""
+    return sum(scores) / len(scores) if scores else None
+
+
+def demo_types_and_dataclasses() -> None:
+    logger.info("\n========== 14. 类型提示与数据类 ==========")
+    students = [Student("张三", 90.0), Student("李四", 86.5)]
+    score_by_name: Dict[str, float] = {student.name: student.score for student in students}
+    logger.info(f"14-1 dataclass对象: {students[0]}")
+    logger.info(f"14-2 类型提示字典: {score_by_name}")
+    logger.info(f"14-3 平均分: {average_score([student.score for student in students])}")
+    logger.info(f"14-4 空集合平均分: {average_score([])}")
+
+
+# ============ 15. 正则表达式 ============
+def demo_regular_expressions() -> None:
+    logger.info("\n========== 15. 正则表达式 ==========")
+    text = "订单号: A20261126001，手机号: 13800138000"
+    order = re.search(r"A\d{11}", text)
+    phone = re.sub(r"(\d{3})\d{4}(\d{4})", r"\1****\2", text)
+    logger.info(f"15-1 提取订单号: {order.group(0) if order else '未匹配'}")
+    logger.info(f"15-2 脱敏手机号: {phone}")
+
+
+# ============ 16. 日期时间 ============
+def demo_datetime() -> None:
+    logger.info("\n========== 16. 日期时间 ==========")
+    now = datetime.now()
+    tomorrow = now + timedelta(days=1)
+    logger.info(f"16-1 格式化时间: {now:%Y-%m-%d %H:%M:%S}")
+    logger.info(f"16-2 一天后: {tomorrow:%Y-%m-%d}")
+    logger.info(f"16-3 ISO解析: {datetime.fromisoformat('2026-11-26T09:30:00')}")
+
+
+# ============ 17. 排序与迭代工具 ============
+def demo_iteration_tools() -> None:
+    logger.info("\n========== 17. 排序与迭代工具 ==========")
+    from itertools import islice, product
+
+    records = [{"name": "甲", "score": 80}, {"name": "乙", "score": 95}, {"name": "丙", "score": 95}]
+    logger.info(f"17-1 稳定排序: {sorted(records, key=lambda item: (-item['score'], item['name']))}")
+    logger.info(f"17-2 islice惰性截取: {list(islice(range(1000000), 3))}")
+    logger.info(f"17-3 product笛卡尔积: {list(product(['小', '大'], ['杯', '碗']))}")
+
+
+# ============ 18. 模块入口与可重复调用 ============
+def demo_main_guard() -> None:
+    logger.info("\n========== 18. 脚本入口 ==========")
+    logger.info("__name__ == '__main__' 时直接运行；被 import 时只定义对象，不自动执行全部示例")
+
+
 # ============ 主函数 ============
 def main():
     """执行所有示例"""
@@ -411,6 +512,13 @@ def main():
     demo_exception_handling()
     demo_file_operations()
     demo_advanced_data_structures()
+    demo_iterators_and_generators()
+    demo_decorators_and_closures()
+    demo_types_and_dataclasses()
+    demo_regular_expressions()
+    demo_datetime()
+    demo_iteration_tools()
+    demo_main_guard()
     logger.info("\n========== Python 学习示例结束 ==========")
 
 

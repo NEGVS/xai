@@ -11,7 +11,7 @@ from datetime import datetime
 # 输入文件路径
 csv_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/岗位关联表_-_关联关系表V2.0.csv'
 # 输出文件路径
-output_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/generated_sql-2.sql'
+output_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/generated_sql-3.sql'
 
 
 def extract_nums(text: str) -> list[int]:
