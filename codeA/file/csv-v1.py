@@ -7,6 +7,7 @@
 import csv
 
 # 输入文件路径
+# /Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/岗位关联表_-_关联关系表V2.0.csv
 csv_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/岗位关联表_-_关联关系表V2.0_副本.csv'
 # 输出文件路径
 output_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/docs/todo/generated_sql.sql'
@@ -15,10 +16,10 @@ output_file = '/Users/andy_mac/Documents/CodeSpace/srzp/ai-engineering-center/do
 def clean_value(value):
     """清理字段值，去除多余空格和引号"""
     if not value:
-        return 'NULL'
+        return "''"
     value = value.strip().strip('"').strip()
     if not value or value == '000' or value == '000,000,000':
-        return 'NULL'
+        return "''"
     # 转义单引号
     value = value.replace("'", "''")
     return f"'{value}'"
